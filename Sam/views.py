@@ -490,3 +490,8 @@ def employeeDelete(request, id):
     return redirect("/employeeshow")  
     # context = {'emp':emp}
     # return render(request,'employeedit.html',context)
+
+
+
+def buttons(request):
+    return render(request,'buttons.html')

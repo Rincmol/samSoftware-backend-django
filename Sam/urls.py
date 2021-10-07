@@ -39,7 +39,7 @@ urlpatterns = [
     path('employeeshow',views.employeeshow), 
     path('employeeEdit/<int:id>',views.employeeEdit, name="edit-employee"),
     path('employeeDelete/<int:id>',views.employeeDelete, name="delete-employee"),
-
+    path('buttons',views.buttons)
      
 ]
 
