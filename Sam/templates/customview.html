@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <meta charset="UTF-8">  
+        <title>Customer View</title>  
+        {% load static %}  
+       <link rel="stylesheet" href="{% static '/css/style.css' %}"/>   
+       <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>  
+
+    
+<body>
+    <section style="padding-top:10px">
+      <div class="container">
+        <button type="button"  style="border-radius:12px;" class="btn  btn-sm btn-block"><b><p style="font-size: 30px;">Profile View</p></b></button>
+        <br>
+      </div>
+    
+      <form method="POST" action="">
+        {% csrf_token %} 
+        
+        <div class="container-sm ">
+              
+           <div class="row" style="padding-top: 2px;">
+            <div class="col-sm-3">
+                <label class="form-control"  style="border-radius:12px;">Customer ID</label>
+              
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control"  placeholder=""  value="{{cus.id}}" disabled>
+            </div>
+          </div>
+  
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Customer Name</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="customer_name" value="{{cus.customer_name}}"  placeholder="" disabled>
+            </div>
+          </div>
+  
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Vat Reg No</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="vat_reg_no"  value="{{cus.vat_reg_no}}" placeholder="" disabled>
+            </div>
+          </div>
+  
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">CR No</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="cr_no" value="{{cus.cr_no}}" placeholder="" disabled>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Expired On</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="expired_on"value="{{cus.expired_on}}"  placeholder="" disabled >
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Land Phone No</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="land_phone" value="{{cus.land_phone}}" placeholder="" disabled >
+            </div>
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Mob No</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="mobile" value="{{cus.mobile}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Contact Person</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="contact_person" value="{{cus.contact_person}}" placeholder="" disabled>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Mob No</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control" name="contact_mobile" value="{{cus.contact_mobile}}" placeholder="" disabled>
+            </div>
+          </div>
+  
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Email Id</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="email" value="{{cus.email}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Location & Address</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="address" value="{{cus.address}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Opening Balance</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="open_balance" value="{{cus.open_balance}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;"> 
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Credit Limit Amount</label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_am" value="{{cus.credit_lim_am}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <label class="form-control"  style="border-radius:12px;">Credit Limit Duration</label>
+             
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_dur" value="{{cus.credit_lim_dur}}"  placeholder="" disabled>
+            </div>
+          </div>
+          
+        </div> 
+        
+  
+        <div class="container">
+          <div class="row" style="padding-top: 15px;"> 
+            
+           <div class="col-sm-4">
+            <button  type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block"><a href="{% url 'delete-customer' cus.id %}">Delete</a> </button>
+           </div>
+           <div class="col-sm-4">
+            <button  type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block"><a href="/customerview">Back</a> </button>
+           </div>
+          </div>
+        </div>
+      </form>  
+    </section>
+    </body>
+    
+    
+
+</html>

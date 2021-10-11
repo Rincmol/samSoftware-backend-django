@@ -18,6 +18,7 @@ from django.contrib.auth.hashers import check_password
 import os
 from django.contrib import messages
 
+
 # Create your views here.
 
 
@@ -133,6 +134,27 @@ def itemshow(request):
     context = {'itemz':itemz}
     return render(request,'itemshow.html',context)
 
+def itemView(request,id):
+    itm = Item.objects.get(id=id)  
+    if request.method == 'POST':
+        itm = Item()
+        itm.item_name = request.POST.get('item_name')
+        itm.item_desc = request.POST.get('item_desc')
+        itm.item_barcode = request.POST.get('item_barcode')
+        itm.item_category = request.POST.get('item_category')
+        itm.item_unit_prim = request.POST.get('item_unit_prim')
+        itm.item_unit_sec = request.POST.get('item_unit_sec')
+        itm.open_balance = request.POST.get('open_balance')
+        itm.buying_price = request.POST.get('buying_price')
+        itm.sell_price = request.POST.get('sell_price')
+        itm.image1 = request.FILES['image1']
+        itm.image2 = request.FILES['image2']
+        itm.image3 = request.FILES['image3']
+        itm.image4 = request.FILES['image4']
+        return redirect('/itemView')
+    context = {'itm':itm}
+    return render(request,'itemview.html',context)
+        
 
 def ItemEdit(request,id):
     itm = Item.objects.get(id=id)   
@@ -195,9 +217,31 @@ def CustomerView(request):
     context = {'cus':cus}
     return render(request,'customerview.html',context)
 
+def customView(request,id):
+    cus = Customer.objects.get(id=id)  
+    if request.method == 'POST':
+        cus.id = request.POST.get('id')
+        cus.customer_name = request.POST.get('customer_name')
+        cus.vat_reg_no = request.POST.get('vat_reg_no')
+        cus.cr_no = request.POST.get('cr_no')
+        cus.expired_on = request.POST.get('expired_on')
+        cus.land_phone = request.POST.get('land_phone')
+        cus.mobile = request.POST.get('mobile')
+        cus.contact_person = request.POST.get('contact_person')
+        cus.contact_mobile = request.POST.get('contact_mobile')
+        cus.email = request.POST.get('email')
+        cus.address = request.POST.get('address')
+        cus.open_balance = request.POST.get('open_balance')
+        cus.credit_lim_am = request.POST.get('credit_lim_am')
+        cus.credit_lim_dur = request.POST.get('credit_lim_dur')
+        return redirect('/customview')
+    context = {'cus':cus}
+    return render(request,'customview.html',context)
+
 def customerEdit(request,id):
     cus = Customer.objects.get(id=id)  
     if request.method == 'POST':
+        cus.id = request.POST.get('id')
         cus.customer_name = request.POST.get('customer_name')
         cus.vat_reg_no = request.POST.get('vat_reg_no')
         cus.cr_no = request.POST.get('cr_no')
@@ -254,6 +298,27 @@ def suppliershow(request):
     context = {'sup':sup}
     return render(request,'suppliershow.html',context)
 
+def supplierView(request,id):
+    sup = Supplier.objects.get(id=id)  
+    if request.method == 'POST':
+        sup.customer_name = request.POST.get('customer_name')
+        sup.vat_reg_no = request.POST.get('vat_reg_no')
+        sup.cr_no = request.POST.get('cr_no')
+        sup.expired_on = request.POST.get('expired_on')
+        sup.land_phone = request.POST.get('land_phone')
+        sup.mobile = request.POST.get('mobile')
+        sup.contact_person = request.POST.get('contact_person')
+        sup.contact_mobile = request.POST.get('contact_mobile')
+        sup.email = request.POST.get('email')
+        sup.address = request.POST.get('address')
+        sup.open_balance = request.POST.get('open_balance')
+        sup.credit_lim_am = request.POST.get('credit_lim_am')
+        sup.credit_lim_dur = request.POST.get('credit_lim_dur')
+        sup.bank_acc_name = request.POST.get('bank_acc_name')
+        sup.bank_acc_no = request.POST.get('bank_acc_no')
+        return redirect('/supplierview')
+    context = {'sup':sup}
+    return render(request,'supplierview.html',context)
 
 def supplierEdit(request,id):
     sup = Supplier.objects.get(id=id)  
@@ -309,6 +374,19 @@ def jobshow(request):
     return render(request,'jobshow.html',context)
 
 
+def JobView(request,id):
+    jb = Job.objects.get(id=id)  
+    if request.method == 'POST':
+        jb.job_name = request.POST.get('job_name')
+        jb.job_desc = request.POST.get('job_desc')
+        jb.imag1 = request.FILES['imag1']
+        jb.imag2 = request.FILES['imag2']
+        jb.imag3 = request.FILES['imag3']
+        jb.imag4 = request.FILES['imag4']
+        return redirect('/jobview')
+    context = {'jb':jb}
+    return render(request,'jobview.html',context)
+
 def JobEdit(request,id):
     jb = Job.objects.get(id=id)  
     if request.method == 'POST':
@@ -350,6 +428,15 @@ def groupshow(request):
     context = {'gp':gp}
     return render(request,'groupshow.html',context)
 
+def groupView(request,id):
+    gp = Group.objects.get(id=id)  
+    if request.method == 'POST':
+        gp.group_name = request.POST.get('group_name')
+        gp.category = request.POST.get('category')
+        return redirect('/groupview')
+    context = {'gp':gp}
+    return render(request,'groupview.html',context)
+
 
 def groupEdit(request,id):
     gp = Group.objects.get(id=id)  
@@ -388,6 +475,17 @@ def ledgershow(request):
     context = {'lg':lg}
     return render(request,'ledgershow.html',context)
 
+
+def ledgerView(request,id):
+    lg = Ledger.objects.get(id=id)  
+    if request.method == 'POST':
+       lg.ledger_name = request.POST.get('ledger_name')
+       lg.group_name = request.POST.get('group_name')
+       lg.category = request.POST.get('category')
+       lg.opening_bal = request.POST.get('opening_bal')
+       return redirect('/ledgerview')
+    context = {'lg':lg}
+    return render(request,'ledgerview.html',context)
 
 def ledgerEdit(request,id):
     lg = Ledger.objects.get(id=id)  
@@ -449,6 +547,35 @@ def employeeshow(request):
     context = {'employeez':employeez}
     return render(request,'employeeshow.html',context)
 
+def emploView(request,id):
+    emp = Employee.objects.get(id=id) 
+    if request.method == "POST":
+        emp = Employee()
+        emp.emp_name = request.POST.get('emp_name')
+        emp.nationality = request.POST.get('nationality')
+        emp.birth_date = request.POST.get('birth_date')
+        emp.joining_date = request.POST.get('joining_date')
+        emp.designation = request.POST.get('designation')
+        emp.department = request.POST.get('department')
+        emp.salary_categ = request.POST.get('salary_categ')
+        emp.passport_no = request.POST.get('passport_no')
+        emp.expir = request.POST.get('expir')
+        emp.id_no = request.POST.get('id_no')
+        emp.id_expir = request.POST.get('id_expir')
+        emp.basic = request.POST.get('basic')
+        emp.housing = request.POST.get('housing')
+        emp.transportation = request.POST.get('transportation')
+        emp.food = request.POST.get('food')
+        emp.mobile = request.POST.get('mobile')
+        emp.other = request.POST.get('other')
+        emp.netpay = request.POST.get('netpay')
+        emp.img1 = request.FILES['img1']
+        emp.img2 = request.FILES['img2']
+        emp.img3 = request.FILES['img3']
+        emp.img4 = request.FILES['img4']
+        return redirect('/emploView')
+    context = {'emp':emp}
+    return render(request,'emploview.html',context)
 
 def employeeEdit(request,id):
     emp = Employee.objects.get(id=id)   
@@ -495,3 +622,11 @@ def employeeDelete(request, id):
 
 def buttons(request):
     return render(request,'buttons.html')
+
+
+
+
+# class RestrictedView(jobadd, TemplateView):
+#     template_name = 'foo/buttons.html'
+#     raise_exception = True  # Raise exception when no access instead of redirect
+#     permission_denied_message = "You are not allowed here."

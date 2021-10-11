@@ -2,7 +2,7 @@
 <html>
     <head>  
         <meta charset="UTF-8">  
-        <title>Customer View</title>  
+        <title>Supplier Registration</title>  
         {% load static %}  
        <link rel="stylesheet" href="{% static '/css/style.css' %}"/>   
        <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -17,22 +17,20 @@
 <body>
     <section style="padding-top:30px">
       <div class="container">
-        <button type="button"  style="border-radius:12px;" class="btn  btn-sm btn-block"><b><p style="font-size: 30px;">Profile View</p></b></button>
+        <button type="button"  style="border-radius:12px;" class="btn  btn-sm btn-block"><b><p style="font-size: 30px;">Supplier  Registration</p></b></button>
         <br>
       </div>
     
       <form method="POST" action="">
         {% csrf_token %} 
-        
         <div class="container-sm ">
-              
+  
           <div class="row" style="padding-top: 5px;">
             <div class="col-sm-3">
-              <label class="form-control"  style="border-radius:12px;">Customer ID</label>
-              <!-- <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Customer ID" > -->
+              <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Company ID" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control"  placeholder=""  value="{{cus.id}}">
+              <input type="text " style="border-radius:12px;" class="form-control"  placeholder=""  value="{{sup.id}}" disabled>
             </div>
           </div>
   
@@ -41,7 +39,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Customer Name" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="customer_name" value="{{cus.customer_name}}"  placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="customer_name" value="{{sup.customer_name}}"  placeholder="" disabled>
             </div>
           </div>
   
@@ -50,7 +48,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Vat Reg No" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="vat_reg_no"  value="{{cus.vat_reg_no}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="vat_reg_no" value="{{sup.vat_reg_no}}"  placeholder="" disabled>
             </div>
           </div>
   
@@ -59,13 +57,13 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="CR No" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="cr_no" value="{{cus.cr_no}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="cr_no" value="{{sup.cr_no}}" placeholder="" disabled>
             </div>
             <div class="col-sm-3">
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Expired On" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="expired_on"value="{{cus.expired_on}}"  placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="expired_on" value="{{sup.expired_on}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;">
@@ -73,13 +71,13 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Land Phone No" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="land_phone" value="{{cus.land_phone}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="land_phone" value="{{sup.land_phone}}" placeholder="" disabled>
             </div>
             <div class="col-sm-3">
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Mob No" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="mobile" value="{{cus.mobile}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="mobile" value="{{sup.mobile}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;">
@@ -87,13 +85,13 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Contact Person" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="contact_person" value="{{cus.contact_person}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="contact_person" value="{{sup.contact_person}}" placeholder="" disabled >
             </div>
             <div class="col-sm-3">
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Mob No" >
             </div>
             <div class="col-sm-3">
-              <input type="text " style="border-radius:12px;" class="form-control" name="contact_mobile" value="{{cus.contact_mobile}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="contact_mobile" value="{{sup.contact_mobile}}" placeholder=""  disabled>
             </div>
           </div>
   
@@ -102,7 +100,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Email Id" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="email" value="{{cus.email}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="email" value="{{sup.email}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;">
@@ -110,7 +108,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Location & Address" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="address" value="{{cus.address}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="address" value="{{sup.address}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;">
@@ -118,7 +116,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Opening Balance" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="open_balance" value="{{cus.open_balance}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="open_balance" value="{{sup.open_balance}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;"> 
@@ -126,7 +124,7 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Credit Limit Amount" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_am" value="{{cus.credit_lim_am}}" placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_am" value="{{sup.credit_lim_am}}" placeholder="" disabled>
             </div>
           </div>
           <div class="row" style="padding-top: 5px;">
@@ -134,23 +132,38 @@
               <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Credit Limit Duration" >
             </div>
             <div class="col-sm-9">
-              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_dur" value="{{cus.credit_lim_dur}}"  placeholder="" >
+              <input type="text " style="border-radius:12px;" class="form-control" name="credit_lim_dur" value="{{sup.credit_lim_dur}}" placeholder="" disabled>
             </div>
           </div>
-          
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control"   placeholder="Bank Account Name" >
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="bank_acc_name" value="{{sup.bank_acc_name}}" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-3">
+              <input type="text " style="border-radius:12px;" class="form-control"  placeholder="Bank Account Number" >
+            </div>
+            <div class="col-sm-9">
+              <input type="text " style="border-radius:12px;" class="form-control" name="bank_acc_no" value="{{sup.bank_acc_no}}" placeholder="" disabled>
+            </div>
+          </div>
         </div> 
-        
   
         <div class="container">
-          <div class="row" style="padding-top: 15px;"> 
-            <div class="col-sm-6">
-              <button type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block">Update</button>
-           </div>
-           <div class="col-sm-6">
-            <button  type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block"><a href="/customerview">Back</a> </button>
-           </div>
+            <div class="row" style="padding-top: 15px;"> 
+              
+             <div class="col-sm-4">
+              <button  type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block"><a href="{% url 'delete-supplier' sup.id %}">Delete</a> </button>
+             </div>
+             <div class="col-sm-4">
+              <button  type="submit" style="border-radius: 12px;" class="btn btn-lg btn-block"><a href="/suppliershow">Back</a> </button>
+             </div>
+            </div>
           </div>
-        </div>
       </form>  
     </section>
     </body>

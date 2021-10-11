@@ -4,7 +4,20 @@
         <meta charset="UTF-8">  
         <title>Ledger Records</title>  
          {% load static %}  
-         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>   
+         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+         
+         <style>
+            table, th, td {
+              border: 2px solid black;
+              border-collapse:collapse;
+              width: 50px;
+            }
+            th, td {
+              padding: 20px;
+              
+            }
+            </style>
+
     </head>  
 
     <body>  
@@ -16,7 +29,7 @@
                     </div>
                     <div class="card-body">
 
-                        <table border="2" class="table table-striped table-bordered table-sm">  
+                        <table  align="center" class="table table-striped table-bordered table-sm">  
                             <thead class="thead-dark">  
                             <tr>  
                                 <th>Ledger ID</th> 
@@ -39,10 +52,10 @@
                 
                                
                                 
-                                 <td>
-                                    <a href="{% url 'edit-ledger' i.id %}" >EDIT</a></td>
+                                <td>
+                                    <a href="{% url 'view-ledger' i.id %}" >View </a> </td>
                                     
-                                   <td><a href="{% url 'delete-ledger' i.id %}">DELETE</a></td> 
+                                   <td><a href="{% url 'edit-ledger' i.id %}">Edit</a>&nbsp;</td> 
                                 
                                 
                                 <!-- <td>  
