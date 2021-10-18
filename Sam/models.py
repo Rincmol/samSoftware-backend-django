@@ -33,18 +33,18 @@ class Item(models.Model):
          
 class Customer(models.Model):
     customer_name   =   models.TextField(max_length=100)
-    vat_reg_no      =   models.TextField(max_length=100)
-    cr_no           =   models.TextField(max_length=100)
-    expired_on      =   models.TextField(max_length=100)
-    land_phone      =   models.TextField(max_length=100)
-    mobile          =   models.TextField(max_length=100)
+    vat_reg_no      =   models.BigIntegerField(max_length=15)
+    cr_no           =   models.BigIntegerField(max_length=100)
+    expired_on      =   models.DateField(max_length=100)
+    land_phone      =   models.BigIntegerField(max_length=100)
+    mobile          =   models.BigIntegerField(max_length=100)
     contact_person  =   models.TextField(max_length=100)
-    contact_mobile  =   models.TextField(max_length=100)
-    email           =   models.TextField(max_length=100)
-    address         =   models.TextField(max_length=100)
-    open_balance    =   models.TextField(max_length=100)
-    credit_lim_am   =   models.TextField(max_length=100)
-    credit_lim_dur  =   models.TextField(max_length=100)
+    contact_mobile  =   models.BigIntegerField(max_length=20)
+    email           =   models.CharField(max_length=30)
+    address         =   models.CharField(max_length=100)
+    open_balance    =   models.CharField(max_length=100)
+    credit_lim_am   =   models.CharField(max_length=100)
+    credit_lim_dur  =   models.CharField(max_length=100)
 
     class Meta:  
         db_table = "sam_customer" 

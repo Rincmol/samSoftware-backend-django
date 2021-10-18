@@ -1,10 +1,13 @@
+from django.http.response import Http404
 from django.shortcuts import render,redirect
 from django.shortcuts import HttpResponse
 from django.urls.conf import path
 from django.utils import encoding
+from rest_framework import response
 from rest_framework.generics import GenericAPIView
+from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
-from .serializers import UserSerializer,LoginSerializer
+from .serializers import   CustomerSerializer, EmployeeSerializer, GroupSerializer, ItemSerializer,  JobSerializer, LedgerSerializer, SupplierSerializer, UserSerializer,LoginSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Customer, Employee, Group, Job, Ledger, Supplier, User,Item
@@ -22,9 +25,8 @@ from django.contrib import messages
 # Create your views here.
 
 
-class RegisterView(GenericAPIView):
+class RegisterApi(APIView):
     serializer_class = UserSerializer
-
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -34,8 +36,7 @@ class RegisterView(GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-class LoginView(APIView):
+class LoginApi(APIView):
     serializer_class = LoginSerializer
     def post(self,request):
         username = request.data['username']
@@ -75,7 +76,7 @@ class LoginView(APIView):
             return response
 
 
-class UserView(APIView):
+class UserApi(APIView):
 
     def get(self, request):
         token = request.COOKIES.get('jwt')
@@ -93,7 +94,7 @@ class UserView(APIView):
         return Response(serializer.data)
 
 
-class LogoutView(APIView):
+class LogoutApi(APIView):
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
@@ -101,6 +102,269 @@ class LogoutView(APIView):
             'message': 'success'
         }
         return response
+
+
+class ItemApi(APIView):
+    serializer_class = ItemSerializer
+    
+    def post(self,request):
+        Serializer = ItemSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ItemEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Item.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        item_data = self.get_object(id)
+        Serializer =ItemSerializer(item_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+         item_data = self.get_object(id)
+         Serializer =ItemSerializer(item_data,data=request.data)
+         if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+         return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        item_data = self.get_object(id)
+        item_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+  
+
+class GroupApi(APIView):
+    serializer_class = GroupSerializer
+    def post(self,request):
+        Serializer = GroupSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GroupEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Group.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        group_data = self.get_object(id)
+        Serializer =GroupSerializer(group_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        group_data = self.get_object(id)
+        Serializer =GroupSerializer(group_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        group_data = self.get_object(id)
+        group_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+        
+
+
+class CustomerApi(APIView):
+    serializer_class = CustomerSerializer
+    def post(self,request):
+        Serializer = CustomerSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CustomerEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Customer.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        cust_data = self.get_object(id)
+        Serializer =CustomerSerializer(cust_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        cust_data = self.get_object(id)
+        Serializer =CustomerSerializer(cust_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        cust_data = self.get_object(id)
+        cust_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+
+class SupplierApi(APIView):
+    serializer_class = SupplierSerializer
+    def post(self,request):
+        Serializer = SupplierSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SupplierEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Supplier.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        sup_data = self.get_object(id)
+        Serializer =SupplierSerializer(sup_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        sup_data = self.get_object(id)
+        Serializer =SupplierSerializer(sup_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        sup_data = self.get_object(id)
+        sup_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+class JobApi(APIView):
+    serializer_class = JobSerializer
+    def post(self,request):
+        Serializer = JobSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class JobEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Job.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        job_data = self.get_object(id)
+        Serializer =JobSerializer(job_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        job_data = self.get_object(id)
+        Serializer =JobSerializer(job_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        job_data = self.get_object(id)
+        job_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+
+class LedgerApi(APIView):
+    serializer_class = LedgerSerializer
+    def post(self,request):
+        Serializer = LedgerSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LedgerEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Ledger.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        ledg_data = self.get_object(id)
+        Serializer =LedgerSerializer(ledg_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        ledg_data = self.get_object(id)
+        Serializer =LedgerSerializer(ledg_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        ledg_data = self.get_object(id)
+        ledg_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+class EmployeeApi(APIView):
+    serializer_class = EmployeeSerializer
+    def post(self,request):
+        Serializer = EmployeeSerializer(data=request.data)
+        if Serializer.is_valid():
+            Serializer.save()
+            return Response(Serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EmployeeEditApi(APIView):
+    def get_object (self,id):
+        try:
+            return Employee.objects.get(id=id)
+        except:
+            raise Http404
+    
+    def get(self,request,id,format =None):
+        emp_data = self.get_object(id)
+        Serializer =EmployeeSerializer(emp_data)
+        return Response(Serializer.data)
+    
+    def patch(self,request,id,format =None):
+        emp_data = self.get_object(id)
+        Serializer =EmployeeSerializer(emp_data,data=request.data)
+        if Serializer.is_valid():
+           Serializer.save()
+           return Response(Serializer.data, status=status.HTTP_201_CREATED)
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        emp_data = self.get_object(id)
+        emp_data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
+
+
+
 
 # CRUD Operations
 

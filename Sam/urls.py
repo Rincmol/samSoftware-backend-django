@@ -1,4 +1,4 @@
-from .views import RegisterView,LoginView, UserView,LogoutView
+from .views import   CustomerApi, CustomerEditApi, EmployeeApi, EmployeeEditApi, GroupApi, GroupEditApi, ItemApi, ItemEditApi, JobApi, JobEditApi, LedgerApi, LedgerEditApi, LoginApi, LogoutApi, RegisterApi, SupplierApi, SupplierEditApi, UserApi
 from django.urls import path
 from Sam import views
 from django.conf.urls.static import static
@@ -7,10 +7,31 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('register', RegisterView.as_view()),
-    path('login', LoginView.as_view()),
-    path('user', UserView.as_view()),
-    path('logout', LogoutView.as_view()),
+   path('register', RegisterApi.as_view()),
+    path('login', LoginApi.as_view()),
+    path('user', UserApi.as_view()),
+    path('logout', LogoutApi.as_view()),
+    path('item', ItemApi.as_view()),
+    path('itemedits/<int:id>', ItemEditApi.as_view()),
+    path('groups', GroupApi.as_view()),
+    path('groupedits/<int:id>', GroupEditApi.as_view()),
+    path('job', JobApi.as_view()),
+    path('jobedits/<int:id>', JobEditApi.as_view()),
+    path('suppl', SupplierApi.as_view()),
+    path('supplieredits/<int:id>', SupplierEditApi.as_view()),
+    path('emp', EmployeeApi.as_view()),
+    path('empedits/<int:id>', EmployeeEditApi.as_view()),
+    path('cust', CustomerApi.as_view()),
+    path('custedits/<int:id>', CustomerEditApi.as_view()),
+    path('ledg', LedgerApi.as_view()),
+    path('ledgedits/<int:id>', LedgerEditApi.as_view()),
+    
+
+
+
+
+
+
     path('items', views.items),
     path('itemshow',views.itemshow), 
     path('ItemEdit/<int:id>',views.ItemEdit, name="edit-item"),
